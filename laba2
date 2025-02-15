@@ -1,0 +1,48 @@
+import string  
+ 
+# Алфавиты  
+alphabet_ru = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"  
+alphabet_en = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"  
+shift = 3  # Фиксированный сдвиг  
+ 
+# Функция шифрования и дешифрования  
+def caesar_cipher(text, decrypt=False):  
+    result = ""  
+    shift_value = -shift if decrypt else shift  # Если дешифруем, меняем сдвиг на отрицательный  
+ 
+    for char in text:  
+        if char in alphabet_ru:  
+            new_idx = (alphabet_ru.index(char) + shift_value) % len(alphabet_ru)  
+            result += alphabet_ru[new_idx]  
+        elif char in alphabet_en:  
+            new_idx = (alphabet_en.index(char) + shift_value) % len(alphabet_en)  
+            result += alphabet_en[new_idx]  
+        else:  
+            result += char  # Оставляем символ без изменений  
+    return result  
+ 
+# Главное меню  
+def main():  
+    while True:  
+        print("\nВыберите действие:")  
+        print("1 - Зашифровать")  
+        print("2 - Расшифровать")  
+        print("0 - Выход")  
+ 
+        choice = input("Введите номер действия: ")  
+        if choice == "0":  
+            break  
+ 
+        text = input("Введите текст: ").upper().replace("Ё", "Е")  # Перевод в верхний регистр  
+        if choice == "1":  
+            result = caesar_cipher(text, decrypt=False)  
+        elif choice == "2":  
+            result = caesar_cipher(text, decrypt=True)  
+        else:  
+            print("Неверный выбор!")  
+            continue  
+ 
+        print(f"\nРезультат: {result}")  
+ 
+if name == "__main__":  # Исправлено здесь 
+    main()
